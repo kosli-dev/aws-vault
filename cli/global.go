@@ -1,5 +1,6 @@
 package cli
 
+// nolint:depguard
 import (
 	"fmt"
 	"io"
@@ -162,7 +163,7 @@ func ConfigureGlobals(app *kingpin.Application) *AwsVault {
 		Envar("AWS_VAULT_FILE_DIR").
 		StringVar(&a.KeyringConfig.FileDir)
 
-	app.PreAction(func(c *kingpin.ParseContext) error {
+	app.PreAction(func(_ *kingpin.ParseContext) error {
 		if !a.Debug {
 			log.SetOutput(io.Discard)
 		}

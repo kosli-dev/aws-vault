@@ -1,5 +1,6 @@
 package cli
 
+// nolint:depguard
 import (
 	"context"
 	"fmt"
@@ -118,7 +119,7 @@ func ConfigureExecCommand(app *kingpin.Application, a *AwsVault) {
 	cmd.Arg("args", "Command arguments").
 		StringsVar(&input.Args)
 
-	cmd.Action(func(c *kingpin.ParseContext) (err error) {
+	cmd.Action(func(_ *kingpin.ParseContext) (err error) {
 		input.Config.MfaPromptMethod = a.PromptDriver(hasBackgroundServer(input))
 		input.Config.NonChainedGetSessionTokenDuration = input.SessionDuration
 		input.Config.AssumeRoleDuration = input.SessionDuration

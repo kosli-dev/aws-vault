@@ -1,5 +1,6 @@
 package vault
 
+// nolint:depguard
 import (
 	"context"
 	"fmt"

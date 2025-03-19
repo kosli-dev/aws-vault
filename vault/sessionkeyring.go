@@ -1,5 +1,6 @@
 package vault
 
+// nolint:depguard
 import (
 	"encoding/base64"
 	"encoding/json"

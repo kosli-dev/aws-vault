@@ -1,5 +1,6 @@
 package vault_test
 
+// nolint:depguard
 import (
 	"testing"
 

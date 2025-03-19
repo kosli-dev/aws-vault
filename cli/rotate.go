@@ -1,5 +1,6 @@
 package cli
 
+// nolint:depguard
 import (
 	"context"
 	"fmt"

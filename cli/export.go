@@ -1,5 +1,6 @@
 package cli
 
+// nolint:depguard
 import (
 	"context"
 	"encoding/json"
@@ -64,7 +65,7 @@ func ConfigureExportCommand(app *kingpin.Application, a *AwsVault) {
 		HintAction(a.MustGetProfileNames).
 		StringVar(&input.ProfileName)
 
-	cmd.Action(func(c *kingpin.ParseContext) (err error) {
+	cmd.Action(func(_ *kingpin.ParseContext) (err error) {
 		input.Config.MfaPromptMethod = a.PromptDriver(false)
 		input.Config.NonChainedGetSessionTokenDuration = input.SessionDuration
 		input.Config.AssumeRoleDuration = input.SessionDuration
@@ -104,15 +105,15 @@ func ExportCommand(input ExportCommandInput, f *vault.ConfigFile, keyring keyrin
 	if input.Format == FormatTypeExportJSON {
 		return printJSON(input, credsProvider)
 	}
-	
+
 	if input.Format == FormatTypeExportINI {
 		return printINI(credsProvider, input.ProfileName, config.Region)
 	}
-	
+
 	if input.Format == FormatTypeExportEnv {
 		return printEnv(input, credsProvider, config.Region, "export ")
 	}
-	
+
 	return printEnv(input, credsProvider, config.Region, "")
 }
 

@@ -1,5 +1,6 @@
 package server
 
+// nolint:depguard
 import (
 	"context"
 	"crypto/rand"
