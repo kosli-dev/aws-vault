@@ -103,13 +103,17 @@ func ExportCommand(input ExportCommandInput, f *vault.ConfigFile, keyring keyrin
 
 	if input.Format == FormatTypeExportJSON {
 		return printJSON(input, credsProvider)
-	} else if input.Format == FormatTypeExportINI {
-		return printINI(credsProvider, input.ProfileName, config.Region)
-	} else if input.Format == FormatTypeExportEnv {
-		return printEnv(input, credsProvider, config.Region, "export ")
-	} else {
-		return printEnv(input, credsProvider, config.Region, "")
 	}
+	
+	if input.Format == FormatTypeExportINI {
+		return printINI(credsProvider, input.ProfileName, config.Region)
+	}
+	
+	if input.Format == FormatTypeExportEnv {
+		return printEnv(input, credsProvider, config.Region, "export ")
+	}
+	
+	return printEnv(input, credsProvider, config.Region, "")
 }
 
 func printJSON(input ExportCommandInput, credsProvider aws.CredentialsProvider) error {

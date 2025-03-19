@@ -1,5 +1,6 @@
 package prompt
 
+// nolint:depguard
 import (
 	"fmt"
 	"strings"

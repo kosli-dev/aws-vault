@@ -118,7 +118,7 @@ func ConfigureGlobals(app *kingpin.Application) *AwsVault {
 		Envar("AWS_VAULT_PROMPT").
 		StringVar(&a.promptDriver)
 
-	app.Validate(func(app *kingpin.Application) error {
+	app.Validate(func(_ *kingpin.Application) error {
 		if a.promptDriver == "" {
 			return nil
 		}
