@@ -31,11 +31,16 @@ jobs:
         os: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4  
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: golangci-lint
+      - name: Install Dependencies
+        run: go mod tidy
+      - name: Verify Build
+        run: go build ./...
+      - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v6.3.2
         with:
           version: v1.52.0
+          args: "--timeout 5m"

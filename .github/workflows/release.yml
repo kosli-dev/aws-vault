@@ -17,7 +17,7 @@ jobs:
       - name: Set Up Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.24"
+          go-version: "1.23"
 
       - name: Extract Version from Tag
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
