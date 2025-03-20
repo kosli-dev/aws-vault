@@ -1,0 +1,4 @@
+builds:
+  - id: aws-vault
+    ldflags:
+      - "-X main.Version=kosli-dev-{{.Env.TAG}}"

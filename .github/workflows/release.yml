@@ -17,21 +17,16 @@ jobs:
       - name: Set Up Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.24"
+          go-version: "1.23"
 
       - name: Extract Version from Tag
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
-      - name: Build Binary
-        run: |
-          go build -ldflags "-X main.Version=kosli-dev-${VERSION}" -o aws-vault .
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v6
         with:
-          files: aws-vault
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
-          body: "Automated release of version ${{ github.ref_name }}"
-          draft: false
-          prerelease: false
+          version: latest
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ env.VERSION }}
