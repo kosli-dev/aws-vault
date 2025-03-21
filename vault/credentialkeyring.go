@@ -59,6 +59,9 @@ func (ck *CredentialKeyring) Set(credentialsName string, creds aws.Credentials) 
 		Key:   credentialsName,
 		Label: fmt.Sprintf("aws-vault (%s)", credentialsName),
 		Data:  bytes,
+
+		// specific Keychain settings
+		KeychainNotTrustApplication: true,
 	})
 }
 
