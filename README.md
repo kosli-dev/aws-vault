@@ -1,11 +1,17 @@
 Since the original repository seems to be no longer maintained (no updates for over a year) and this tool is a critical security component that should be updated regularly to address known CVEs, we decided to fork it under the kosli-dev organization and update dependencies ourselves.
 
-For macOS, the aws-vault binary should be notarized. Since we haven't implemented this yet, you will need to build the binary yourself on your local machine. Simply run:
+For macOS, the aws-vault binary should be notarized. Since we haven't implemented this yet, you will need to build the binary yourself on your local machine and then move it to replace the one you installed:
 ```
-go build .
+$ aws-vault --version
+v7.2.0
+$ location=$(which aws-vault) # /opt/homebrew/bin/aws-vault
+$ cd somewhere && git clone https://github.com/kosli-dev/aws-vault.git
+$ cd aws-vault
+$ go build .
+$ mv aws-vault $location
+$ aws-vault --version
+dev
 ```
-Then, move the resulting binary to your bin path.
-
 
 # Original README:
 
